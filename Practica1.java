@@ -6,7 +6,21 @@ public class Practica1 {
 
     //EJERCICIO 1
     public static Set<Integer> multiplos (Iterator<Integer> it) {
-        //TODO
+        Set<Integer> aux = new HashSet<>();
+        Set<Integer> resultado = new HashSet<>();
+        while (it.hasNext()){
+            int n = it.next();
+            if (n !=0){
+                for (int x : aux) {
+                    if (n % x == 0) {
+                        resultado.add(n);
+                    } else if (x % n == 0) {
+                        resultado.add(x);
+                    }
+                }
+                aux.add(n);
+            }
+        }
         return null;
     }
 
