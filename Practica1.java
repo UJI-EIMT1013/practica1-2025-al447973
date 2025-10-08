@@ -26,22 +26,77 @@ public class Practica1 {
 
     //EJERCICIO2
     public static void separate (Set<Integer> cuadrados, Set<Integer> noCuadrados)  {
-        //TODO
+        Set<Integer> todos = new HashSet<>();
+        todos.addAll(cuadrados);
+        todos.addAll(noCuadrados);
 
+        Set<Integer> nuevosCuadrados = new HashSet<>();
+        Set<Integer> nuevosNoCuadrados = new HashSet<>();
+
+        for (int n : todos) {
+            boolean esCuadrado = false;
+            for (int x : todos) {
+                if (x * x == n) {
+                    esCuadrado = true;
+                    break;
+                }
+            }
+            if (esCuadrado) {
+                nuevosCuadrados.add(n);
+            } else {
+                nuevosNoCuadrados.add(n);
+            }
+        }
+
+        cuadrados.clear();
+        cuadrados.addAll(nuevosCuadrados);
+
+        noCuadrados.clear();
+        noCuadrados.addAll(nuevosNoCuadrados);
     }
 
     //EJERCICIO 3
     public static<T> Collection<Set<T>> divideInSets (Iterator<T> it) {
-        //TODO
+        Collection<Set<T>> resultado = new ArrayList<>();
+        Set<T> actual = new HashSet<>();
+
+        while (it.hasNext()) {
+            T elemento = it.next();
+            if (actual.contains(elemento)) {
+                resultado.add(actual);
+                actual = new HashSet<>();
+            }
+            actual.add(elemento);
+        }
+
+        if (!actual.isEmpty()) {
+            resultado.add(actual);
+        }
         return null;
     }
 
     //EJERCICIO 4
     public static<T> Collection<Set<T>> coverageSet2 (Set<T> u,ArrayList<Set<T>> col) {
-        //TODO
+        Collection<Set<T>> resultado = new ArrayList<>();
+        
+        for (int i = 0; i < col.size(); i++) {
+            for (int j = i + 1; j < col.size(); j++) {
+                Set<T> a = col.get(i);
+                Set<T> b = col.get(j);
+
+                Set<T> union = new HashSet<>(a);
+                union.addAll(b);
+
+                if (union.equals(u)) {
+                    resultado.add(a);
+                    resultado.add(b);
+                }
+            }
+        }
         return null;
     }
 
 
 
 }
+
